@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <style>
+      * {
+        margin: 0;
+      }
+      body {
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+      }
+      #svg {
+        height: 500px;
+        width: 500px;
+      }
+      #path {
+        transition: d 2s linear;
+      }
+    </style>
+  </head>
+  <body>
+    <svg id="svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        id="path"
+        d="M65.5 469L27.5 332.5L65.5 141.5L0 0.5L229.5 53.5L327.5 209.5L229.5 265L65.5 469Z"
+        fill="#E7E6D4"
+      />
+    </svg>
+
+    <script>
+      const path = document.getElementById("path");
+      setTimeout(() => {
+        path.setAttribute(
+          "d",
+          "M47.5 416L109 197.5L0.5 126L109 66.5L211.5 0.5L309.5 156.5L211.5 212L47.5 416Z"
+        );
+      }, 2000);
+    </script>
+  </body>
+</html>
