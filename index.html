@@ -12,32 +12,91 @@
         width: 100vw;
         height: 100vh;
       }
-      #svg {
-        height: 500px;
-        width: 500px;
-      }
-      #path {
-        transition: d 2s linear;
-      }
     </style>
   </head>
   <body>
-    <svg id="svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        id="path"
-        d="M65.5 469L27.5 332.5L65.5 141.5L0 0.5L229.5 53.5L327.5 209.5L229.5 265L65.5 469Z"
-        fill="#E7E6D4"
-      />
+    <svg
+      width="500"
+      height="500"
+      viewBox="0 0 500 500"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path id="path" fill="#E7E6D4" />
     </svg>
 
     <script>
       const path = document.getElementById("path");
-      setTimeout(() => {
-        path.setAttribute(
-          "d",
-          "M47.5 416L109 197.5L0.5 126L109 66.5L211.5 0.5L309.5 156.5L211.5 212L47.5 416Z"
+      const duration = 4000; // длительность анимации в ms
+      const numberOfStates = 4; // кол-во ключевых кадров (состояний)
+      const numberOfCoordinates = 16; // кол-во координат в path
+      const keyStates = [
+        [65.5, 47.5, 224.5, 244.5],
+        [469, 416, 380.5, 375.5],
+        [27.5, 109, 31.5, 40],
+        [332.5, 197.5, 321, 422],
+        [65.5, 0.5, 80.5, 59],
+        [141.5, 126, 126.5, 263.5],
+        [0, 109, 0, 0],
+        [0.5, 66.5, 0, 121, 5],
+        [229.5, 211.5, 169, 183.5],
+        [53.5, 0.5, 154.5, 94.5],
+        [327.5, 309.5, 374.5, 315.5],
+        [209.5, 156.5, 103.5, 0],
+        [229.5, 211.5, 135, 172.5],
+        [265, 212, 226.5, 138],
+        [65.5, 47.5, 224.5, 244.5],
+        [469, 416, 380.5, 375.5],
+      ]; // ключевые состояние каждой координаты, массив размером numberOfCoordinates x numberOfStates
+      const timeDelta = duration / (numberOfStates - 1); // время, за которое координата переходит из предыдущего состояния в последующее
+
+      function getPrevStateIndex(time) {
+        return Math.floor(time / timeDelta);
+      }
+
+      function getCoordinateCurrentValue(coordinateIndex, time) {
+        const prevStateIndex = getPrevStateIndex(time);
+        const nextStateIndex = prevStateIndex + 1;
+        const keyCoordinateValues = keyStates[coordinateIndex];
+        const prevKeyValue = keyCoordinateValues[prevStateIndex];
+        const nextKeyValue = keyCoordinateValues[nextStateIndex];
+        return (
+          ((time - prevStateIndex * timeDelta) *
+            (nextKeyValue - prevKeyValue)) /
+            timeDelta +
+          prevKeyValue
         );
-      }, 2000);
+      }
+
+      function getCoordinateCurrentValuePeriodic(coordinateIndex, time) {
+        const periodIndex = Math.floor(time / duration);
+        const timePeriodic =
+          periodIndex % 2 === 0
+            ? time % duration
+            : duration - (time % duration);
+        return getCoordinateCurrentValue(coordinateIndex, timePeriodic);
+      }
+
+      // Возвращает массив [0, 1, 2, ..., N - 1]
+      function getArrayN(N) {
+        return [...Array(N).keys()];
+      }
+
+      function mapStateArrayToPath(stateArray) {
+        return `M${stateArray[0]} ${stateArray[1]}L${stateArray[2]} ${stateArray[3]}L${stateArray[4]} ${stateArray[5]}L${stateArray[6]} ${stateArray[7]}L${stateArray[8]} ${stateArray[9]}L${stateArray[10]} ${stateArray[11]}L${stateArray[12]} ${stateArray[13]}L${stateArray[14]} ${stateArray[15]}Z`;
+      }
+
+      function animate() {
+        requestAnimationFrame(function animate(time) {
+          const state = getArrayN(numberOfCoordinates).map((index) =>
+            getCoordinateCurrentValuePeriodic(index, time)
+          );
+          path.setAttribute("d", mapStateArrayToPath(state));
+          requestAnimationFrame(animate);
+        });
+      }
+
+      animate();
     </script>
   </body>
 </html>
