@@ -1,31 +1,36 @@
 <html>
   <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <style>
       * {
         margin: 0;
       }
       body {
         background-color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 100vw;
         height: 100vh;
+        position: relative;
+        overflow: hidden;
       }
       .svg {
         filter: blur(24px);
+        width: 2000px;
+        height: 2000px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #path {
+        transform: translate(1000px, 1000px);
       }
     </style>
   </head>
   <body>
-    <svg
-      class="svg"
-      width="500"
-      height="500"
-      viewBox="0 0 500 500"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg class="svg" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path id="path" fill="#E7E6D4" />
     </svg>
 
