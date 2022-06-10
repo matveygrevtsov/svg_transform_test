@@ -19,7 +19,6 @@
         overflow: hidden;
       }
       .svg {
-        filter: blur(24px);
         width: 2000px;
         height: 2000px;
         position: absolute;
@@ -34,7 +33,16 @@
   </head>
   <body>
     <div class="root">
-      <svg class="svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        class="svg"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        filter="url(#blur)"
+      >
+        <filter id="blur">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="50" />
+        </filter>
+
         <path id="path" fill="#E7E6D4" />
       </svg>
     </div>
