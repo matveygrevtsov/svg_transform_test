@@ -7,9 +7,12 @@
     <style>
       * {
         margin: 0;
+        box-sizing: border-box;
       }
       body {
         background-color: black;
+      }
+      .root {
         width: 100vw;
         height: 100vh;
         position: relative;
@@ -25,14 +28,16 @@
         transform: translate(-50%, -50%);
       }
       #path {
-        transform: translate(1000px, 1000px);
+        transform: translate(858px, 795px);
       }
     </style>
   </head>
   <body>
-    <svg class="svg" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path id="path" fill="#E7E6D4" />
-    </svg>
+    <div class="root">
+      <svg class="svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path id="path" fill="#E7E6D4" />
+      </svg>
+    </div>
 
     <script>
       const path = document.getElementById("path");
