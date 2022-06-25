@@ -16,6 +16,7 @@
         justify-content: space-between;
         flex-direction: column;
         background-color: darkkhaki;
+        min-height: 100%;
       }
 
       #header,
@@ -57,13 +58,13 @@
       const button = document.getElementById("button");
       const footer = document.getElementById("footer");
 
-      function resizeMain() {
-        main.style.minHeight = window.innerHeight;
+      function resize() {
+        body.style.minHeight = window.innerHeight;
       }
 
-      resizeMain();
+      resize();
 
-      window.addEventListener("resize", resizeMain);
+      window.addEventListener("resize", resize);
 
       button.addEventListener("click", () =>
         alert(
