@@ -10,67 +10,37 @@
         box-sizing: border-box;
       }
 
-      #main {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: column;
-        background-color: darkkhaki;
-        min-height: 100%;
-      }
-
-      #header,
-      #button,
-      #footer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #header {
+      .header {
         height: 70px;
-        width: 100%;
-        background-color: thistle;
+        background-color: cyan;
+        position: relative;
       }
 
-      #button {
-        width: 200px;
-        height: 50px;
-        background-color: cornflowerblue;
+      .modalWindow {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background-color: crimson;
+        z-index: 200;
       }
 
-      #footer {
-        height: 70px;
-        width: 100%;
-        background-color: bisque;
+      .logo {
+        z-index: 300;
+        position: absolute;
+        right: 16px;
+        top: 0;
+        bottom: 0;
+        width: 100px;
+        background-color: darkgoldenrod;
       }
     </style>
   </head>
   <body>
-    <main id="main">
-      <header id="header">Header</header>
-      <button id="button">Button</button>
-      <footer id="footer">Footer</footer>
-    </main>
-    <script>
-      const main = document.getElementById("main");
-      const header = document.getElementById("header");
-      const button = document.getElementById("button");
-      const footer = document.getElementById("footer");
-
-      function resize() {
-        body.style.minHeight = window.innerHeight;
-      }
-
-      resize();
-
-      window.addEventListener("resize", resize);
-
-      button.addEventListener("click", () =>
-        alert(
-          `main.clientHeight: ${main.clientHeight}\nwindow.innerHeight: ${window.innerHeight}`
-        )
-      );
-    </script>
+    <header class="header">
+      <div class="logo">Logo</div>
+    </header>
+    <div class="modalWindow"></div>
   </body>
 </html>
